@@ -7,7 +7,7 @@ BrazeのコンテンツカードをWeb上のカルーセル内に埋め込む場
 ## 利用手順
 1. index.htmlおよび/imgディレクトリをダウンロードし、index.htmlを開きます。
    - カルーセルが表示されたページが確認できます。
-   - 
+     
 ![image](https://github.com/user-attachments/assets/0ba90b62-f08b-4e0b-933a-3ccfe3aafc7a)
 
 
