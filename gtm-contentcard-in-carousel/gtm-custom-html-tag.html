@@ -1,0 +1,44 @@
+// index.htmlのカルーセル内の画像をコンテンツカードで置き換えるスクリプト
+// Braze Initialization Tagが発行した後にこのタグをCustom HTML Tagとして配信する
+
+<script>
+var TARGET_ELEMENT_SELECTOR = '#img_contentcard-target';  // 上書きしたい要素のセレクタを指定
+var TARGET_FRAME_ID = 'carousel_banner'; //Braze画面で key:value = frame_id:carousel_banner
+
+console.log("carousel-contentcards tag called");
+  
+braze.subscribeToContentCardsUpdates(function(contentCards) {
+  var targetCards = [];
+  
+  // フレームIDが一致するカードを抽出
+  for (var i = 0; i < contentCards.cards.length; i++) {
+    if (contentCards.cards[i].extras.frame_id === TARGET_FRAME_ID) {
+      targetCards.push(contentCards.cards[i]);
+    }
+  }
+
+  if (targetCards.length > 0) {
+    // updatedでソートして最新のカードを取得
+    targetCards.sort(function(a, b) {
+      return new Date(b.updated) - new Date(a.updated);  // 降順にソート
+    });
+
+    var latestCard = targetCards[0];  // 最新のカードを取得
+
+    // 既存の画像タグのsrcを最新カードのimageUrlで上書き
+    var imgElement = document.querySelector(TARGET_ELEMENT_SELECTOR);
+    imgElement.src = latestCard.imageUrl;
+
+    // クリック時にカードのURLへ遷移
+    imgElement.addEventListener('click', function() {
+      braze.logContentCardClick(latestCard);
+      braze.requestImmediateDataFlush();
+      window.location.href = latestCard.url;  // カードのURLにリダイレクト
+    });
+
+    // インプレッションのログ
+    braze.logContentCardImpressions([latestCard]);
+  }
+});
+braze.requestContentCardsRefresh();
+</script>
