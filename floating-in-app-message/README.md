@@ -23,16 +23,24 @@ Brazeのアプリ内メッセージ（IAM）をフローティングのポップ
    - メディアライブラリ：./img/quiz-campaign.png の画像を追加
    - HTML： ./iam-custom-code.html の内容を貼り付けてください。
         - 画像URLについては、上記のメディアライブラリにアップロードしたURLに置き換えてください。
+![image](https://github.com/user-attachments/assets/24574ce4-7a37-4bd0-9198-0648f1747f37)
 
 4. メッセージ作成の「設定」タブで、index.html内で指定しているキーと値のペアを設定します。
    - キー：「floating」、値：「right.bottom」
+  
+![image](https://github.com/user-attachments/assets/aeb5fb7b-56a1-4545-b778-6ec54cd90203)
    
 5. 配信スケジュールで、index.html内で指定しているトリガーイベントを設定します。
    - カスタムイベントを実行： 「lp-iam-show」
-   
+
+![image](https://github.com/user-attachments/assets/373e443b-0b4b-487c-ac17-e15762ba0938)
+
 6. ターゲットオーディエンスを設定し、index.htmlを開いたユーザーがターゲットに含まれるように設定します。
    - セグメントとして、All Users (xxx - Web) など
-   
-7. 設定確認まで進め、キャンペーンを保存します。
+  
+![image](https://github.com/user-attachments/assets/9ee14d15-421b-4dd1-987b-1c415583b3bf)
 
-8.  キャンペーンが稼働している状態で、index.htmlをブラウザで開くと、設定したIAMがフローティングで表示されることが確認できるはずです。
+   
+8. 設定確認まで進め、キャンペーンを保存します。
+
+9.  キャンペーンが稼働している状態で、index.htmlをブラウザで開くと、設定したIAMがフローティングで表示されることが確認できます。
