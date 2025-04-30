@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 300px;
+      height: 300px;
+      overflow: hidden;
+      background: transparent;
+    }
+    .inapp-container {
+      position: relative;
+      width: 100%;
+      height: auto;
+    }
+    .inapp-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      left: 260px;
+      width: 30px;
+      height: 30px;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      line-height: 30px;
+      text-align: center;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="inapp-container">
+  <a href="https://www.braze.com/ja/resources/articles"><img src="./img/quiz-campaign.png" alt="クイズキャンペーン" width="300px" onclick="brazeBridge.logClick("img-click")"></a>
+  <button class="close-btn" onclick="brazeBridge.closeMessage()">×</button>
+</div>
+
+</body>
+</html>

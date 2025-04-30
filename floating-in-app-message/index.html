@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <!-- タイトルを変更 -->
+  <title>サンプルページ</title>
+
+  <!-- Braze Web SDK（CDN）の読み込み -->  
+ <script type="text/javascript">
+  +function(a,p,P,b,y){a.braze={};a.brazeQueue=[];for(var s="BrazeSdkMetadata DeviceProperties Card Card.prototype.dismissCard Card.prototype.removeAllSubscriptions Card.prototype.removeSubscription Card.prototype.subscribeToClickedEvent Card.prototype.subscribeToDismissedEvent Card.fromContentCardsJson ImageOnly CaptionedImage ClassicCard ControlCard ContentCards ContentCards.prototype.getUnviewedCardCount Feed Feed.prototype.getUnreadCardCount ControlMessage InAppMessage InAppMessage.SlideFrom InAppMessage.ClickAction InAppMessage.DismissType InAppMessage.OpenTarget InAppMessage.ImageStyle InAppMessage.Orientation InAppMessage.TextAlignment InAppMessage.CropType InAppMessage.prototype.closeMessage InAppMessage.prototype.removeAllSubscriptions InAppMessage.prototype.removeSubscription InAppMessage.prototype.subscribeToClickedEvent InAppMessage.prototype.subscribeToDismissedEvent InAppMessage.fromJson FullScreenMessage ModalMessage HtmlMessage SlideUpMessage User User.Genders User.NotificationSubscriptionTypes User.prototype.addAlias User.prototype.addToCustomAttributeArray User.prototype.addToSubscriptionGroup User.prototype.getUserId User.prototype.getUserId User.prototype.incrementCustomUserAttribute User.prototype.removeFromCustomAttributeArray User.prototype.removeFromSubscriptionGroup User.prototype.setCountry User.prototype.setCustomLocationAttribute User.prototype.setCustomUserAttribute User.prototype.setDateOfBirth User.prototype.setEmail User.prototype.setEmailNotificationSubscriptionType User.prototype.setFirstName User.prototype.setGender User.prototype.setHomeCity User.prototype.setLanguage User.prototype.setLastKnownLocation User.prototype.setLastName User.prototype.setPhoneNumber User.prototype.setPushNotificationSubscriptionType User.prototype.setLineId InAppMessageButton InAppMessageButton.prototype.removeAllSubscriptions InAppMessageButton.prototype.removeSubscription InAppMessageButton.prototype.subscribeToClickedEvent FeatureFlag FeatureFlag.prototype.getStringProperty FeatureFlag.prototype.getNumberProperty FeatureFlag.prototype.getBooleanProperty FeatureFlag.prototype.getImageProperty FeatureFlag.prototype.getJsonProperty FeatureFlag.prototype.getTimestampProperty Banner automaticallyShowInAppMessages destroyFeed hideContentCards showContentCards showFeed showInAppMessage deferInAppMessage toggleContentCards toggleFeed changeUser destroy getDeviceId getDeviceId initialize isPushBlocked isPushPermissionGranted isPushSupported logCardClick logCardDismissal logCardImpressions logContentCardImpressions logContentCardClick logCustomEvent logFeedDisplayed logInAppMessageButtonClick logInAppMessageClick logInAppMessageHtmlClick logInAppMessageImpression logPurchase openSession requestPushPermission removeAllSubscriptions removeSubscription requestContentCardsRefresh requestFeedRefresh refreshFeatureFlags requestImmediateDataFlush enableSDK isDisabled setLogger setSdkAuthenticationSignature addSdkMetadata disableSDK subscribeToContentCardsUpdates subscribeToFeedUpdates subscribeToInAppMessage subscribeToSdkAuthenticationFailures toggleLogging unregisterPush wipeData handleBrazeAction subscribeToFeatureFlagsUpdates getAllFeatureFlags logFeatureFlagImpression requestBannersRefresh insertBanner logBannerClick logBannerImpressions getAllBanners subscribeToBannersUpdates isInitialized".split(" "),i=0;i<s.length;i++){for(var m=s[i],k=a.braze,l=m.split("."),j=0;j<l.length-1;j++)k=k[l[j]];k[l[j]]=(new Function("return function "+m.replace(/\./g,"_")+"(){window.brazeQueue.push(arguments); return true}"))()}window.braze.getDeferredInAppMessage=function(){return new window.braze.InAppMessage};window.braze.getCachedContentCards=function(){return new window.braze.ContentCards};window.braze.getCachedFeed=function(){return new window.braze.Feed};window.braze.getUser=function(){return new window.braze.User};window.braze.getFeatureFlag=function(){return new window.braze.FeatureFlag};window.braze.getBanner=function(){return new window.braze.Banner};window.braze.newBannerFromJson=function(){return new window.braze.Banner};(y=p.createElement(P)).type='text/javascript';
+    y.src='https://js.appboycdn.com/web-sdk/5.7/braze.min.js';
+    y.async=1;(b=p.getElementsByTagName(P)[0]).parentNode.insertBefore(y,b)
+  }(window,document,'script');
+  
+ // Braze SDKを初期化
+ braze.initialize("YOUR-API-KEY-HERE", {
+        baseUrl: "YOUR-SDK-ENDPOINT-HERE",
+        allowUserSuppliedJavascript: true,  // HTMLベースのIAMの有効化
+        minimumIntervalBetweenTriggerActionsInSeconds: 0, // 次のIAM表示までの間隔を0秒に設定
+        enableLogging: true
+});
+
+braze.subscribeToInAppMessage(function(inAppMessage) {
+  if (inAppMessage.extras['floating'] === "right.bottom") {
+    braze.showInAppMessage(inAppMessage);
+    
+    // IAM枠用のiframeの表示位置設定
+    Object.assign(document.querySelector('iframe.ab-in-app-message').style, {
+        position: 'fixed',
+        bottom: '15px',
+        right: '15px',
+        top: 'auto',
+        width: '300px', 
+        height: '300px',  
+        maxWidth: '90%', 
+        maxHeight: '90%',
+        margin: '0',
+        transform: 'none'
+    });
+    
+    // レイアウト関係を矯正するためにメインスレッド処理完了後に以下が動くようにする
+    setTimeout(function () {
+        
+        // IAM表示中にスクロールできるように変更
+        document.body.classList.remove('ab-pause-scrolling');
+    
+        // 中央表示解除
+        if (document.querySelector('.ab-iam-root')) {
+            document.querySelector('.ab-iam-root').setAttribute('class', '');
+        }
+    
+        // カスタムHTMLの IAM 本体である iframe 取得
+        var iframe = document.querySelector('.ab-html-message');
+        var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+    
+        // モーダル背景領域を無色透明化
+        //iframeDoc.querySelector('.bz-background').style.backgroundColor = '#FFFFFF00';
+    });  
+  }
+});
+
+// セッション開始
+braze.openSession();
+
+braze.changeUser("shopping-user1");　// ログインユーザーIDを指定
+
+/*** IAMをトリガーイベント：このIAMを表示したいページではこのイベントを発火させるようにする ***/
+braze.logCustomEvent("lp-iam-show");
+</script>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  body {
+    background-color: #fff; 
+    color: #333; 
+  }
+
+  /* 上部グレーバナー */
+  .top-banner {
+    width: 100%;
+    background-color: #f2f2f2;
+    color: #333;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .top-banner .left-info {
+    font-weight: bold;
+  }
+
+  header {
+    width: 100%;
+    background-color: #fff;  
+    border-bottom: 1px solid #ccc;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  header .title {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  header .menu-link {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  .main-visual {
+    padding: 1rem;
+    text-align: center;
+  }
+  .main-visual h1 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  .main-visual a {
+    color: #007bff;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .product-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 1rem;
+    padding: 0 1rem 1rem;
+  }
+  .product {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    overflow: hidden;
+    position: relative;
+  }
+  .product img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .product-details {
+    padding: 0.5rem;
+  }
+
+  .product-brand {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 0.3rem;
+  }
+
+  .product-name {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.2;
+  }
+
+  .product-price {
+    font-size: 0.85rem;
+    color: #333; 
+    margin-bottom: 0.2rem;
+  }
+  .product-price-discount {
+    color: #e60023; 
+    font-weight: bold;
+  }
+  .original-price {
+    color: #999;
+    text-decoration: line-through;
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .discount-label,
+  .stock-label {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    background-color: #e60023; /* 赤 */
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+  }
+
+  .stock-label {
+    left: auto;
+    right: 0.5rem;
+  }
+
+  .favorite-btn {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    width: 28px;
+    height: 28px;
+    background-color: #fff; 
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .favorite-btn:hover {
+    background-color: #f9f9f9;
+  }
+  .favorite-btn i {
+    color: #999; 
+    font-size: 1rem;
+  }
+
+  .banner {
+    margin: 1rem;
+    padding: 0.8rem;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+
+  .footer-menu {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.5rem 0;
+  }
+  .footer-menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer-menu a i {
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="top-banner">
+  <div class="left-info">SPECIAL キャンペーン 実施中</div>
+</div>
+
+<header>
+  <div class="title">MODERN FURNITURES</div>
+  <a class="menu-link" href="#">一覧を見る &gt;</a>
+</header>
+
+<div class="product-list">
+  <div class="product">
+    <div class="stock-label">残り5点</div>
+    <img src="./img/product01.png" alt="商品1" />
+    <div class="product-details">
+      <div class="product-brand">KOTATSU EDITION</div>
+      <div class="product-name">コタツ</div>
+      <div class="product-price">
+        <span class="product-price-discount">¥8,000</span>
+        <span class="original-price">¥39,600</span>
+      </div>
+    </div>
+    <div class="favorite-btn">⭐︎</div>
+  </div>
+
+  <div class="product">
+    <div class="stock-label">残り3点</div>
+    <img src="./img/product02.png" alt="商品2" />
+    <div class="product-details">
+      <div class="product-brand">MOTHER EARTH</div>
+      <div class="product-name">チェア</div>
+      <div class="product-price">
+        <span class="product-price-discount">¥9,800</span>
+        <span class="original-price">¥27,500</span>
+      </div>
+    </div>
+    <div class="favorite-btn">⭐︎</div>
+  </div>
+
+  <div class="product">
+    <!-- 半透明ラベル例 -->
+    <div class="stock-label">残り1点</div>
+    <img src="./img/product03.png" alt="商品3" />
+    <div class="product-details">
+      <div class="product-brand">WOOD PEOPLE</div>
+      <div class="product-name">簞笥</div>
+      <div class="product-price">
+        <span class="product-price-discount">¥40,000</span>
+        <span class="original-price">¥79,600</span>
+      </div>
+    </div>
+    <div class="favorite-btn">⭐︎</div>
+  </div>
+
+  <div class="product">
+    <img src="./img/product04.png" alt="商品3" />
+    <div class="product-details">
+      <div class="product-brand">SLEEP DESIGN</div>
+      <div class="product-name">布団</div>
+      <div class="product-price">
+        <span class="product-price-discount">¥18,000</span>
+        <span class="original-price">¥27,500</span>
+      </div>
+    </div>
+    <div class="favorite-btn">⭐︎</div>
+  </div>
+
+</div>
+
+</body>
+</html>
