@@ -23,6 +23,7 @@ Brazeのアプリ内メッセージ（IAM）をフローティングのポップ
    - メディアライブラリ：./img/quiz-campaign.png の画像を追加
    - HTML： ./iam-custom-code.html の内容を貼り付けてください。
         - 画像URLについては、上記のメディアライブラリにアップロードしたURLに置き換えてください。
+
 ![image](https://github.com/user-attachments/assets/24574ce4-7a37-4bd0-9198-0648f1747f37)
 
 4. メッセージ作成の「設定」タブで、index.html内で指定しているキーと値のペアを設定します。
