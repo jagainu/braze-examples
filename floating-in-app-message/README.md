@@ -10,7 +10,7 @@ Brazeのアプリ内メッセージ（IAM）をフローティングのポップ
 1. WebSDK初期化パラメーターとして以下を設定。
 - allowUserSuppliedJavascript: true
 - minimumIntervalBetweenTriggerActionsInSeconds: 0
-※デフォルトは30秒間たたないと次のIAMが表示できない。これを0秒に設定することによりすぐに次のIAMも表示できる
+（※デフォルトは30秒間たたないと次のIAMが表示できない。これを0秒に設定することによりすぐに次のIAMも表示できる）
 
 2. [braze.automaticallyShowInAppMessages()](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#automaticallyshowinappmessages) は呼ばないようにする。
 - 代わりに[braze.subscribeToInAppMessage()](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetoinappmessage)によりIAMを取得し、Key-valueペアの条件に合致するIAMの場合には追加のカスタマイズの処理を行い、表示する形で実装します。
