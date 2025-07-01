@@ -1,5 +1,17 @@
 # braze-gtm-contentcard-in-carousel
-BrazeのコンテンツカードをWeb上のカルーセル内に埋め込む場合のサンプルです。
+Brazeのコンテンツカードのフルカスタマイズ実装例。
+Web上のカルーセル内にカードの画像を埋め込む方法のサンプルです。
+
+## コンテンツカードのフルカスタマイズ実装のポイント
+
+1. `braze.subscribeToContentCardsUpdates`でカードを取得する
+
+2. キーと値のペア(後述)の条件に合うカードを抽出し、そのカードの情報（画像のURLなど）使って、Webサイトを上書きする
+
+3. カードがユーザーの画面表示された時や、クリックされた時に記録するためのメソッドを呼ぶようにする
+   - `logContentCardImpressions`
+   - `logContentCardClick` 
+
 
 ## 利用前提
 - Google Tag ManagerにてBraze Initialization Tagにて、Braze Web SDKの初期化が行われていること
@@ -39,7 +51,7 @@ BrazeのコンテンツカードをWeb上のカルーセル内に埋め込む場
 
 
 6. ターゲットオーディエンスを設定し、キャンペーンを開始し、index.htmlを開きます。
-   - あなたがキャンペーンのターゲットに含まれれば、コンテンツカードが配信され、カルーセルの最初の画像ファイルが差し代わるはずです。
+   - キャンペーンのターゲットに含まれれば、コンテンツカードが配信され、カルーセルの最初の画像ファイルが差し代わるはずです。
 
 <img width="1119" alt="image" src="https://github.com/user-attachments/assets/24f043ca-f40e-4d4a-920a-37aa7918b7eb">
 
