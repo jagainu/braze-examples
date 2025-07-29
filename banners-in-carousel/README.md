@@ -12,7 +12,7 @@ Brazeの新機能BannersをWeb SDKにて取得し、カルーセル内に埋め�
 2. メッセージ作成 > 配置(placement)の設定をします。
 - 未設定の場合、「配置の管理」から新しい配置を作成できます。
 - 配置を作成し、サンプルのコードに合わせて 配置ID（placement ID）をcarousel_banner1として設定してください。
-<img width="1051" height="298" alt="スクリーンショット 2025-07-29 15 17 34" src="https://github.com/user-attachments/assets/c0c4f01b-8c4f-41a2-ab19-9a78b17ac59e" />
+<img width="1038" height="298" alt="image" src="https://github.com/user-attachments/assets/1dadc07c-3835-44da-8b98-7e4d7fb5984b" />
 
 
 3. メッセージ作成 > 「バナーを作成」から表示されるバナーを編集します。
