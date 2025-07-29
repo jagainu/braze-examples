@@ -21,7 +21,7 @@
 // Bannersの読み込み
 braze.subscribeToBannersUpdates((banners) => {
   // 該当のPlacement IDのBannersを取得
-  const myBanner = braze.getBanner("braze_showcase");
+  const myBanner = braze.getBanner("carousel_banner1");
   if (!myBanner) {
     console.log("No Banner in the placement ID");
     return;
@@ -41,7 +41,7 @@ braze.openSession();
 braze.changeUser("myUserID");　// ログインユーザーIDを指定
 
 // Bannersの更新
-braze.requestBannersRefresh(["braze_showcase"]);
+braze.requestBannersRefresh(["carousel_banner1"]);
 
 </script>
 
