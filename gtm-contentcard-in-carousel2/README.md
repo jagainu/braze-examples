@@ -1,22 +1,13 @@
-# braze-gtm-contentcard-in-carousel
+# braze-gtm-contentcard-in-carousel2
 Brazeのコンテンツカードのフルカスタマイズ実装例。
+braze-gtm-contentcard-in-carouselのレートリミット対策版。
 Web上のカルーセル内にカードの画像を埋め込む方法のサンプルです。
-
-## コンテンツカードのフルカスタマイズ実装のポイント
-
-1. `braze.subscribeToContentCardsUpdates`でカードを取得する
-
-2. キーと値のペア(後述)の条件に合うカードを抽出し、そのカードの情報（画像のURLなど）使って、Webサイトを上書きする
-
-3. カードがユーザーの画面表示された時や、クリックされた時に記録するためのメソッドを呼ぶようにする
-   - `logContentCardImpressions`
-   - `logContentCardClick`
 
 ## レートリミット対策
 
-`braze.requestContentCardsRefresh()` をページ訪問ごとに呼び出すと、短時間に複数ページを閲覧した場合にレートリミットに引っかかり、コンテンツカードが読み込まれない問題が発生します。
+Webサイトのトップページのみでコンテンツカードを利用する場合には、braze-gtm-contentcard-in-carouselの実装で問題ない場合が多いのですが、`braze.requestContentCardsRefresh()` を各ページに埋め込むような場合で、短時間に複数ページを閲覧した場合には、レートリミットに引っかかり、コンテンツカードが読み込まれない問題が発生することがとざいます。
 
-本実装では以下のロジックでレートリミットを回避しています：
+本実装では、同じ機能を維持したまま、以下のロジックでレートリミットを回避しています：
 
 1. **初回訪問時**: `requestContentCardsRefresh()` を呼び出し、その日時をローカルストレージに記録
 2. **3分以内の再訪問**: `getCachedContentCards()` からキャッシュされたカードを取得して表示
