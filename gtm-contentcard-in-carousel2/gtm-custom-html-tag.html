@@ -1,0 +1,78 @@
+// index.htmlのカルーセル内の画像をコンテンツカードで置き換えるスクリプト
+// Braze Initialization Tagが発行した後にこのタグをCustom HTML Tagとして配信する
+
+<script>
+var TARGET_ELEMENT_SELECTOR = '#img_contentcard-target';  // 上書きしたい要素のセレクタを指定
+var TARGET_FRAME_ID = 'carousel_banner'; //Braze画面で key:value = frame_id:carousel_banner
+var REFRESH_INTERVAL_MS = 3 * 60 * 1000;  // 3分（ミリ秒）
+var LAST_REFRESH_KEY = 'braze_contentcards_last_refresh';
+
+console.log("carousel-contentcards tag called");
+
+// コンテンツカードを処理する共通関数
+function processContentCards(cards) {
+  var targetCards = [];
+
+  // フレームIDが一致するカードを抽出
+  for (var i = 0; i < cards.length; i++) {
+    if (cards[i].extras && cards[i].extras.frame_id === TARGET_FRAME_ID) {
+      targetCards.push(cards[i]);
+    }
+  }
+
+  if (targetCards.length > 0) {
+    // updatedでソートして最新のカードを取得
+    targetCards.sort(function(a, b) {
+      return new Date(b.updated) - new Date(a.updated);  // 降順にソート
+    });
+
+    var latestCard = targetCards[0];  // 最新のカードを取得
+
+    // 既存の画像タグのsrcを最新カードのimageUrlで上書き
+    var imgElement = document.querySelector(TARGET_ELEMENT_SELECTOR);
+    if (imgElement) {
+      imgElement.src = latestCard.imageUrl;
+
+      // クリック時にカードのURLへ遷移（重複登録防止）
+      imgElement.onclick = function() {
+        braze.logContentCardClick(latestCard);
+        braze.requestImmediateDataFlush();
+        window.location.href = latestCard.url;  // カードのURLにリダイレクト
+      };
+
+      // インプレッションのログ
+      braze.logContentCardImpressions([latestCard]);
+    }
+  }
+}
+
+// リフレッシュが必要かどうかを判定
+function shouldRefresh() {
+  var lastRefresh = localStorage.getItem(LAST_REFRESH_KEY);
+  if (!lastRefresh) {
+    return true;  // 初回訪問
+  }
+  var elapsed = Date.now() - parseInt(lastRefresh, 10);
+  return elapsed >= REFRESH_INTERVAL_MS;
+}
+
+// リフレッシュ日時を記録
+function recordRefreshTime() {
+  localStorage.setItem(LAST_REFRESH_KEY, Date.now().toString());
+}
+
+if (shouldRefresh()) {
+  // 3分以上経過している場合: サーバーから最新を取得
+  console.log("Refreshing content cards from server...");
+  braze.subscribeToContentCardsUpdates(function(contentCards) {
+    processContentCards(contentCards.cards);
+  });
+  braze.requestContentCardsRefresh();
+  recordRefreshTime();
+} else {
+  // 3分以内の場合: キャッシュから取得
+  console.log("Using cached content cards...");
+  var cachedCards = braze.getCachedContentCards();
+  processContentCards(cachedCards.cards);
+}
+</script>
