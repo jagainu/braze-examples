@@ -73,6 +73,8 @@ if (shouldRefresh()) {
   // 3分以内の場合: キャッシュから取得
   console.log("Using cached content cards...");
   var cachedCards = braze.getCachedContentCards();
+  console.log("Cached cards:", cachedCards);
+  console.log("Cards count:", cachedCards.cards ? cachedCards.cards.length : 0);
   processContentCards(cachedCards.cards);
 }
 </script>
