@@ -61,16 +61,19 @@ function recordRefreshTime() {
   localStorage.setItem(LAST_REFRESH_KEY, Date.now().toString());
 }
 
+// 常にsubscribeしておく（カード更新時にコールバックが呼ばれる）
+braze.subscribeToContentCardsUpdates(function(contentCards) {
+  console.log("Content cards updated via subscription");
+  processContentCards(contentCards.cards);
+});
+
 if (shouldRefresh()) {
   // 3分以上経過している場合: サーバーから最新を取得
   console.log("Refreshing content cards from server...");
-  braze.subscribeToContentCardsUpdates(function(contentCards) {
-    processContentCards(contentCards.cards);
-  });
   braze.requestContentCardsRefresh();
   recordRefreshTime();
 } else {
-  // 3分以内の場合: キャッシュから取得
+  // 3分以内の場合: キャッシュから即時表示
   console.log("Using cached content cards...");
   var cachedCards = braze.getCachedContentCards();
   console.log("Cached cards:", cachedCards);
