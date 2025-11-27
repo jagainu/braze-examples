@@ -27,7 +27,7 @@ Webサイトのトップページのみでコンテンツカードを利用す�
 ## 利用前提
 - Google Tag ManagerにてBraze Initialization Tagにて、Braze Web SDKの初期化が行われていること
 
-## 利用手順
+## 利用手順 (gtm-contentcard-in-carouselと同様です)
 1. index.htmlおよび/imgディレクトリをダウンロードし、index.htmlを開きます。
    - カルーセルが表示されたページが確認できます。
 
@@ -44,27 +44,31 @@ Webサイトのトップページのみでコンテンツカードを利用す�
    - Braze Initialization Tagの後にカスタムHTMLタグが発効するようにタグの順序を設定
    - 上記のindex.htmlが開かれた時にタグが発行するようにトリガーを設定
 
-<!-- TODO: スクリーンショット - GTMカスタムHTMLタグの設定画面 -->
+<img width="1670" height="1018" alt="image" src="https://github.com/user-attachments/assets/b2e7d0f6-05f9-4403-aa68-cdd1e1a3689e" />
+
 
 
 4. Brazeの管理画面内でコンテンツカードのキャンペーンを作成します。
    - セグメント
    - 画像のみで画像とリンク先のURLを入力します。
 
-<!-- TODO: スクリーンショット - Brazeコンテンツカードキャンペーン作成画面 -->
+<img width="1696" height="1102" alt="image" src="https://github.com/user-attachments/assets/8be12b8a-14c9-454b-ac0d-bcd0437931f5" />
+
 
 
 5. コンテンツカードのキャンペーンの「設定」タブでキーと値のペアを設定します。
    - キー：「frame_id」、値：「carousel_banner」
    - このサンプルでは上記のキーと値のペアが設定されているコンテンツカードのうち、更新日が直近のものがカルーセルに埋め込まれるようになっています。
 
-<!-- TODO: スクリーンショット - キーと値のペア設定画面 -->
+<img width="1696" height="1102" alt="image" src="https://github.com/user-attachments/assets/0ac5991a-f092-4327-be2f-00eb0a73a13a" />
+
 
 
 6. ターゲットオーディエンスを設定し、キャンペーンを開始し、index.htmlを開きます。
    - キャンペーンのターゲットに含まれれば、コンテンツカードが配信され、カルーセルの最初の画像ファイルが差し代わるはずです。
 
-<!-- TODO: スクリーンショット - コンテンツカード配信後のカルーセル表示 -->
+<img width="2238" height="874" alt="image" src="https://github.com/user-attachments/assets/0f1e1c65-054b-4873-9d74-01fe0ec126a4" />
+
 
 ## デバッグ方法
 
