@@ -79,5 +79,6 @@ Webサイトのトップページのみでコンテンツカードを利用す�
 - `"Using cached content cards..."` - キャッシュから取得中
 
 ローカルストレージの値は開発者ツールの「Application」タブから確認できます。
+- Local Storage → braze_contentcards_last_refresh
 
 <!-- TODO: スクリーンショット - 開発者ツールでのデバッグ画面 -->
