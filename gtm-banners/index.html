@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NDC3W2WL');
+    </script>
+    <!-- End Google Tag Manager -->
+ <title>Braze Banners Example - MODERN FURNITURES</title>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  body {
+    background-color: #fff; 
+    color: #333; 
+  }
+
+  /* 上部グレーバナー */
+  .top-banner {
+    width: 100%;
+    background-color: #f2f2f2;
+    color: #333;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .top-banner .left-info {
+    font-weight: bold;
+  }
+
+  header {
+    width: 100%;
+    background-color: #fff;  
+    border-bottom: 1px solid #ccc;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  header .title {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  header .menu-link {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  .main-visual {
+    padding: 1rem;
+    text-align: center;
+  }
+  .main-visual h1 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  .main-visual a {
+    color: #007bff;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .product-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 1rem;
+    padding: 0 1rem 1rem;
+  }
+  .product {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    overflow: hidden;
+    position: relative;
+  }
+  .product img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .product-details {
+    padding: 0.5rem;
+  }
+
+  .product-brand {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 0.3rem;
+  }
+
+  .product-name {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.2;
+  }
+
+  .product-price {
+    font-size: 0.85rem;
+    color: #333; 
+    margin-bottom: 0.2rem;
+  }
+  .product-price-discount {
+    color: #e60023; 
+    font-weight: bold;
+  }
+  .original-price {
+    color: #999;
+    text-decoration: line-through;
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .discount-label,
+  .stock-label {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    background-color: #e60023; /* 赤 */
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+  }
+
+  .stock-label {
+    left: auto;
+    right: 0.5rem;
+  }
+
+  .favorite-btn {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    width: 28px;
+    height: 28px;
+    background-color: #fff; 
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .favorite-btn:hover {
+    background-color: #f9f9f9;
+  }
+  .favorite-btn i {
+    color: #999; 
+    font-size: 1rem;
+  }
+
+  .banner {
+    margin: 1rem;
+    padding: 0.8rem;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+
+  .footer-menu {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.5rem 0;
+  }
+  .footer-menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer-menu a i {
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+  }
+</style>
+</head>
+<body>
+
+<div id="braze-banner-1"></div>
+
+<header>
+  <div class="title">MODERN FURNITURES</div>
+  <a class="menu-link" href="#">一覧を見る &gt;</a>
+</header>
+
+<div class="product-list">
+  <div class="product">
+    <div class="stock-label">残り5点</div>
+    <img src="./img/product01.png" alt="商品1" />
+    <div class="product-details">
+      <div class="product-brand">KOTATSU EDITION</div>
+      <div class="product-name">コタツ</div>
+      <div class="product-price">
+        <span class="product-price-discount">¥8,000</span>
+        <span class="original-price">¥39,600</span>
+      </div>
+    </div>
+    <div class="favorite-btn">⭐︎</div>
+  </div>
+
+  <div class="product">
+    <div class="stock-label">残り3点</div>
+    <img src="./img/product02.png" alt="商品2" />
+    <div class="product-details">
+      <div class="product-brand">MOTHER EARTH</div>
+      <div class="product-name">チェア</div>
+      <div class="product-price">
+        <span class="product-price-discount">¥9,800</span>
+        <span class="original-price">¥27,500</span>
+      </div>
+    </div>
+    <div class="favorite-btn">⭐︎</div>
+  </div>
+
+  <div class="product">
+    <!-- 半透明ラベル例 -->
+    <div class="stock-label">残り1点</div>
+    <img src="./img/product03.png" alt="商品3" />
+    <div class="product-details">
+      <div class="product-brand">WOOD PEOPLE</div>
+      <div class="product-name">簞笥</div>
+      <div class="product-price">
+        <span class="product-price-discount">¥40,000</span>
+        <span class="original-price">¥79,600</span>
+      </div>
+    </div>
+    <div class="favorite-btn">⭐︎</div>
+  </div>
+
+  <div class="product">
+    <img src="./img/product04.png" alt="商品3" />
+    <div class="product-details">
+      <div class="product-brand">SLEEP DESIGN</div>
+      <div class="product-name">布団</div>
+      <div class="product-price">
+        <span class="product-price-discount">¥18,000</span>
+        <span class="original-price">¥27,500</span>
+      </div>
+    </div>
+    <div class="favorite-btn">⭐︎</div>
+  </div>
+
+</div>
+
+</body>
+</html>

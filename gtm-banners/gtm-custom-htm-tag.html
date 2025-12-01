@@ -1,0 +1,26 @@
+// HTML内のdiv(id="braze-banner-1")の中身をBrazeから取得したBannersで置き換えるスクリプト
+// Braze Initialization Tagが発行した後にこのタグをCustom HTML Tagとして配信する
+
+<script>
+console.log("Triggering gtm-banners tag");
+// Bannersの読み込み
+braze.subscribeToBannersUpdates(function(banners) {
+  // 配置ID（Placement ID）="header_banner1"のBannersを取得
+  var myBanner = braze.getBanner("header_banner1");
+  if (!myBanner) {
+    console.log("No Banner in the placement ID");
+    return;
+  } else if (myBanner.isControl) {
+    console.log("Received Banner is in control group");
+    return;
+  }
+
+  // BannersのHTMLをDOMのどの位置に挿入するかを指定し、バナー挿入
+  var container = document.getElementById("braze-banner-1");
+  braze.insertBanner(myBanner, container);
+  console.log("Received Banner inserted to the container");
+});
+
+// Bannersの更新
+braze.requestBannersRefresh(["header_banner1"]);
+</script>

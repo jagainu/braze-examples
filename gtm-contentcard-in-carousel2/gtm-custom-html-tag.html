@@ -9,6 +9,12 @@ var LAST_REFRESH_KEY = 'braze_contentcards_last_refresh';
 
 console.log("carousel-contentcards tag called");
 
+// 事前にsubscribeしておく（requestContentCardsRefresh()が呼ばれた時にコールバックが実行される）
+braze.subscribeToContentCardsUpdates(function(contentCards) {
+  console.log("Content cards updated via subscription");
+  processContentCards(contentCards.cards);
+});
+
 // コンテンツカードを処理する共通関数
 function processContentCards(cards) {
   var targetCards = [];
@@ -61,12 +67,6 @@ function recordRefreshTime() {
   localStorage.setItem(LAST_REFRESH_KEY, Date.now().toString());
 }
 
-// 常にsubscribeしておく（カード更新時にコールバックが呼ばれる）
-braze.subscribeToContentCardsUpdates(function(contentCards) {
-  console.log("Content cards updated via subscription");
-  processContentCards(contentCards.cards);
-});
-
 if (shouldRefresh()) {
   // 3分以上経過している場合: サーバーから最新を取得
   console.log("Refreshing content cards from server...");
@@ -78,6 +78,14 @@ if (shouldRefresh()) {
   var cachedCards = braze.getCachedContentCards();
   console.log("Cached cards:", cachedCards);
   console.log("Cards count:", cachedCards.cards ? cachedCards.cards.length : 0);
-  processContentCards(cachedCards.cards);
+
+  if (cachedCards.cards && cachedCards.cards.length > 0) {
+    processContentCards(cachedCards.cards);
+  } else {
+    // キャッシュが空の場合はフォールバックでリフレッシュ
+    console.log("Cache empty, falling back to refresh...");
+    braze.requestContentCardsRefresh();
+    recordRefreshTime();
+  }
 }
 </script>
