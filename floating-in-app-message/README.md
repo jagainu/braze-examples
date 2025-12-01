@@ -48,14 +48,13 @@ Brazeのアプリ内メッセージ（IAM）をフローティングのポップ
 
 ![image](https://github.com/user-attachments/assets/373e443b-0b4b-487c-ac17-e15762ba0938)
 
-6. ターゲットオーディエンスを設定し、index.htmlを開いたユーザーがターゲットに含まれるように設定します。
+6. また、テストのタイミングでは「ユーザーがキャンペーンを再度受信できるようにする」にチェックし、時間も「0分間」と設定すると、ページを読み込むたびにIAMが表示ができます。（本番ではメッセージ内容に合わせて設定を変えてください）
+<img width="2648" height="1394" alt="image" src="https://github.com/user-attachments/assets/0b1dac2c-0159-401a-a9d9-5ac22acae236" />
+
+7. ターゲットオーディエンスを設定し、index.htmlを開いたユーザーがターゲットに含まれるように設定します。
    - セグメントとして、All Users (xxx - Web) など
   
 ![image](https://github.com/user-attachments/assets/9ee14d15-421b-4dd1-987b-1c415583b3bf)
-
-7. また、テストのタイミングでは「ユーザーがキャンペーンを再度受信できるようにする」にチェックし、時間も「0分間」と設定すると、ページを読み込むたびにIAMが表示ができます。（本番ではメッセージ内容に合わせて設定を変えてください）
-<img width="2596" height="1440" alt="image" src="https://github.com/user-attachments/assets/403e8718-505e-4f75-93f4-2ee9b4be2e9c" />
-
    
 8. 設定確認まで進め、キャンペーンを保存します。
 
