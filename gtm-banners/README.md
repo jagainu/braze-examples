@@ -1,13 +1,13 @@
 # banners-in-carousel
-Brazeの新機能BannersをWeb SDKにて取得し、カルーセル内に埋め込む場合のサンプルです。
+Braze Web SDKにてBannersのデータを取得し、ページのトップにある<div>タグ内にバナーを埋め込む場合のサンプルです。
 
 ## 利用前提
 - Google Tag ManagerにてBraze Initialization Tagにて、Braze Web SDKの初期化が行われていること
 
 ## 利用手順
 1. index.htmlおよび/imgディレクトリをダウンロードし、index.htmlを開きます。
-   - カルーセルが表示されたページが確認できます。
-
+<img width="1341" height="937" alt="image" src="https://github.com/user-attachments/assets/67a497b4-75c1-4e57-b437-223b16a225ec" />
+最初はBannersの読み込みがされていないため、ページトップにバナーは表示されていません。
 
 2. index.htmlを編集しheaderにGTMのタグを入れます。
 
@@ -44,3 +44,6 @@ Brazeの新機能BannersをWeb SDKにて取得し、カルーセル内に埋め�
 
 
 8. キャンペーンを開始し、index.htmlを開きます。
+
+<img width="1299" height="836" alt="image" src="https://github.com/user-attachments/assets/15b75f47-130d-4ee9-a9ff-3df91fd6ba06" />
+ページトップにバナーが読み込みれたことが確認できます。
