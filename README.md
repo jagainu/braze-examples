@@ -1,2 +1,2 @@
 # braze-examples
-Code examples for Braze
+BrazeのWeb SDKを中心にカスタマイズ方法のサンプルコードを格納しています。
