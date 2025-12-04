@@ -26,15 +26,21 @@ Brazeの新機能BannersをWeb SDKにて取得し、カルーセル内に埋め�
 - 未設定の場合、「配置の管理」から新しい配置を作成できます。
 - 配置を作成し、サンプルのコードに合わせて 配置ID（placement ID）をheader_banner1として設定してください。
 
+<img width="995" height="375" alt="image" src="https://github.com/user-attachments/assets/f56d3ee1-521c-43ab-b61b-6d499936f90a" />
 
 
 6. メッセージ作成 > 「バナーを作成」から表示されるバナーを編集します。
 
+<img width="1290" height="823" alt="image" src="https://github.com/user-attachments/assets/11a566b0-57ce-452d-8aed-78196caaf642" />
 
 
 7. ターゲットオーディエンスを設定します。
 - ここではサイトを開いたユーザーが確実に対象になるように「All Users」などを選択してください。
+
+<img width="1021" height="442" alt="image" src="https://github.com/user-attachments/assets/891ccb93-322f-49e3-9c13-12b28cdfc123" />
+
 - ABテストの設定も表示の確認のタイミングでは、コントロールグループを削除してください。
+<img width="1018" height="582" alt="image" src="https://github.com/user-attachments/assets/cddfa4ff-1fb1-4ede-acdd-c0be49d2c8a9" />
 
 
 8. キャンペーンを開始し、index.htmlを開きます。
