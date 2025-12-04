@@ -1,5 +1,7 @@
 # floating-in-app-message
 Brazeのアプリ内メッセージ（IAM）をフローティングのポップアップとしてWebページ内に表示したい場合のサンプルです。
+Braze公式のサンプルコードを参考にしています。
+https://github.com/braze-inc/in-app-message-templates/tree/master/braze-templates/6-braze-nps
 
 ## 利用前提
 - こちらのサンプルでは、WebSDKをCDNで呼び出しを行っています。
