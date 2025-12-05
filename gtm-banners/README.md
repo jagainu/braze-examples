@@ -1,4 +1,4 @@
-# banners-in-carousel
+# gtm-banners
 Braze Web SDKにてBannersのデータを取得し、ページのトップにあるdivタグ内にバナーを埋め込む場合のサンプルです。
 
 ## 利用前提
