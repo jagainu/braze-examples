@@ -12,7 +12,6 @@ https://github.com/braze-inc/in-app-message-templates/tree/master/braze-template
 1. GTM Braze初期化タグのパラメーターとして以下を設定。
 - Allow HTML In-App Messagesを有効化
 - Automatically show new in app messagesを無効化
-- Enable Web SDK Loggingを有効化（テスト用）
 - Minimum Interval Between Triggered Messages: 0
 （※デフォルトは30秒間たたないと次のIAMが表示できない。これを0秒に設定することによりすぐに次のIAMも表示できる）
 
@@ -28,6 +27,7 @@ https://github.com/braze-inc/in-app-message-templates/tree/master/braze-template
 3. GTMにてBraze初期化タグをSDK APIキーやSDKエンドポイントを入れ、以下の設定を追加で行います。また、このindex.htmlが開かれた時にタグが発効するようにトリガーを設定します。
 - Allow HTML In-App Messagesを有効化
 - Automatically show new in app messagesを無効化
+- Enable Web SDK Loggingを有効化（※テスト用途）
 - Minimum Interval Between Triggered Messages: 0
 <img width="2344" height="1480" alt="image" src="https://github.com/user-attachments/assets/a63fcbf3-7e79-4b87-8928-65effce0aae3" />
 
