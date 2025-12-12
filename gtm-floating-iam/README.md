@@ -78,7 +78,6 @@ https://github.com/braze-inc/in-app-message-templates/tree/master/braze-template
 13. キャンペーンが稼働している状態で、index.htmlをブラウザで開くと、設定したIAMがフローティングで表示されることが確認できます。
 
 うまく表示されない場合には、以下のような観点を再確認してください。
- - 上記2〜6の設定を行ったキャンペーンが稼働しているか？Webブラウザのコンソールログを確認し、Web SDKの初期化がうまくいっているか？　IAMのトリガーとなるイベントが発火しているか？などをご確認ください。
-
-![image](https://github.com/user-attachments/assets/1c1a1cf8-5b14-420d-9017-22b8b1a53eb8)
-
+ - 上記2〜6のGTMタグが順序通りに発火しているか？
+ - カスタムイベントが実行されているか？
+ - キャンペーンの設定で、9〜11の設定が正しくされており、index.htmlを開いた時の状況と該当するか？
