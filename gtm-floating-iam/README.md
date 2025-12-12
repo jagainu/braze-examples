@@ -11,27 +11,38 @@ https://github.com/braze-inc/in-app-message-templates/tree/master/braze-template
 このサンプルのようにIAMをフローティング表示させるカスタマイズを行う上でのポイントとなる点は以下の通りです。
 1. GTM Braze初期化タグのパラメーターとして以下を設定。
 - Allow HTML In-App Messagesを有効化
+- Automatically show new in app messagesを無効化
 - Minimum Interval Between Triggered Messages: 0
 （※デフォルトは30秒間たたないと次のIAMが表示できない。これを0秒に設定することによりすぐに次のIAMも表示できる）
 
-2. [braze.automaticallyShowInAppMessages()](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#automaticallyshowinappmessages) は呼ばないようにする。
-- 代わりに[braze.subscribeToInAppMessage()](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetoinappmessage)によりIAMを取得し、Key-valueペアの条件に合致するIAMの場合には追加のカスタマイズの処理を行い、表示する形で実装します。
+2. カスタムHTMLにて初期化タグ直後に[braze.subscribeToInAppMessage()](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetoinappmessage)によりIAMを取得し、Key-valueペアの条件に合致するIAMの場合には追加のカスタマイズの処理を行い、表示する形で実装します。
 
-3. 特定のページでIAMを表示したい場合には、カスタムイベントトリガーとして、そのページでイベントを発火させる。
+3. Key-valueペアの条件に合致するIAMをキャンペーンにて設定します。
 
 ## サンプル稼働の確認手順
 1. index.htmlおよび/imgディレクトリをダウンロードし、index.htmlを開きます。
-2. index.htmlを編集し、braze.initializeのAPIキーおよびエンドポイントを変更します。
-```
- // Braze SDKを初期化
- braze.initialize("YOUR-API-KEY-HERE", {
-        baseUrl: "YOUR-SDK-ENDPOINT-HERE",
-        allowUserSuppliedJavascript: true,  // HTMLベースのIAMの有効化
-        minimumIntervalBetweenTriggerActionsInSeconds: 0, // 次のIAM表示までの間隔を0秒に設定
-        enableLogging: true
-});
-```
-3. Brazeの管理画面内でキャンペーンのページを開き、アプリ内メッセージのキャンペーンを作成します。
+
+2. index.htmlを編集しheaderにGTMのタグを入れます。
+
+3. GTMにてBraze初期化タグをSDK APIキーやSDKエンドポイントを入れ、以下の設定を追加で行います。また、このindex.htmlが開かれた時にタグが発効するようにトリガーを設定します。
+- Allow HTML In-App Messagesを有効化
+- Automatically show new in app messagesを無効化
+- Minimum Interval Between Triggered Messages: 0
+<img width="2344" height="1480" alt="image" src="https://github.com/user-attachments/assets/a63fcbf3-7e79-4b87-8928-65effce0aae3" />
+
+4. 新しくカスタムHTMLタグを作り（「subscribeToInAppMessage」タグ）、gtm-custom-html-tag.htmlの内容をコピーします。
+   - 「document.write をサポートする」にチェック
+   - このindex.htmlが開かれた時にタグが発効するようにトリガーを設定
+   - Braze Initialization Tagの直後にこのカスタムHTMLタグが発効するようにタグの順序を設定
+<img width="1475" height="734" alt="Screenshot 2025-12-12 at 17 34 46" src="https://github.com/user-attachments/assets/948ff213-0887-471b-8934-bc3bd17df539" />
+
+3.次に、Braze Actionsタグを設定します。
+   - このindex.htmlが開かれた時に、必要なタイミングでタグが発効するようにトリガーを設定（例：50%スクロールされた際に発火するイベント名「page_scroll_50%」）
+   - 上記の、「subscribeToInAppMessage」タグの後にこのカスタムHTMLタグが発効するようにタグの順序を設定
+<img width="1208" height="719" alt="Screenshot 2025-12-12 at 17 40 43" src="https://github.com/user-attachments/assets/6a3d4558-efd8-4505-9ec8-c145a9d03a6c" />
+
+
+4. Brazeの管理画面内でキャンペーンのページを開き、アプリ内メッセージのキャンペーンを作成します。
    - 送信先：Webブラウザー
    - メッセージタイプ：カスタムコード
    - メディアライブラリ：./img/quiz-campaign.png の画像を追加
