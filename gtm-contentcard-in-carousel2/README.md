@@ -1,11 +1,11 @@
 # braze-gtm-contentcard-in-carousel2
 Brazeのコンテンツカードのフルカスタマイズ実装例。
-braze-gtm-contentcard-in-carouselのレートリミット対策版。
+gtm-contentcard-in-carouselのレートリミット対策版。
 Web上のカルーセル内にカードの画像を埋め込む方法のサンプルです。
 
 ## レートリミット対策
 
-Webサイトのトップページのみでコンテンツカードを利用する場合には、[braze-gtm-contentcard-in-carousel](https://github.com/jagainu/braze-examples/tree/main/gtm-contentcard-in-carousel)の実装で問題ない場合が多いのですが、`braze.requestContentCardsRefresh()` を各ページに埋め込むような場合で、短時間に複数ページを閲覧した場合には、レートリミットに引っかかり、コンテンツカードが読み込まれない問題が発生することがとざいます。
+Webサイトのトップページのみでコンテンツカードを利用する場合には、[gtm-contentcard-in-carousel](https://github.com/jagainu/braze-examples/tree/main/gtm-contentcard-in-carousel)の実装で問題ない場合が多いのですが、`braze.requestContentCardsRefresh()` を各ページに埋め込むような場合で、短時間に複数ページを閲覧した場合には、レートリミットに引っかかり、コンテンツカードが読み込まれない問題が発生することがとざいます。
 
 本実装では、braze-gtm-contentcard-in-carouselと同じ機能を維持したまま、以下のロジックでレートリミットを回避しています：
 
@@ -80,5 +80,3 @@ Webサイトのトップページのみでコンテンツカードを利用す�
 
 ローカルストレージの値は開発者ツールの「Application」タブから確認できます。
 - Local Storage → braze_contentcards_last_refresh
-
-<!-- TODO: スクリーンショット - 開発者ツールでのデバッグ画面 -->

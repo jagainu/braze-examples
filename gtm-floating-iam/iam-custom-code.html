@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>クイズに答えて豪華賞品をゲット</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 300px;
+      height: 300px;
+      overflow: hidden;
+      background: transparent;
+    }
+    .inapp-container {
+      position: relative;
+      width: 100%;
+      height: auto;
+    }
+    .inapp-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      left: 260px;
+      width: 30px;
+      height: 30px;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      line-height: 30px;
+      text-align: center;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="inapp-container">
+    <img
+      src="https://braze-images.com/appboy/communication/assets/image_assets/images/693b68d73276ed0063be32d7/original.png?1765501143"
+      alt="ポイントキャンペーン1万円"
+      width="300"
+      onclick="brazeBridge.logClick('img-click')">
+    <button class="close-btn" type="button" onclick="brazeBridge.closeMessage()">×</button>
+  </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<script>
+braze.subscribeToInAppMessage(function(inAppMessage) {
+  
+  if (inAppMessage.extras['floating'] === "right.bottom") {
+    
+    braze.showInAppMessage(inAppMessage);
+    
+    // IAM枠用のiframeの表示位置設定
+    Object.assign(document.querySelector('iframe.ab-in-app-message').style, {
+        position: 'fixed',
+        bottom: '15px',
+        right: '15px',
+        left: 'auto',
+        top: 'auto',
+        width: '300px',   // 適切な幅に調整
+        height: '300px',    // 高さをコンテンツに合わせる場合はauto。見切れる場合は具体的なpx値を指定。
+        maxWidth: '90%',   // スマホなどの小さい画面を考慮
+        maxHeight: '90%',
+        margin: '0',
+        transform: 'none'
+    });
+    
+    // レイアウト関係を矯正するためにメインスレッド処理完了後に以下が動くようにする
+    setTimeout(function () {
+        
+        // IAM表示中にスクロールできるようにする
+        document.body.classList.remove('ab-pause-scrolling');
+    
+        // 中央表示解除
+        if (document.querySelector('.ab-iam-root')) {
+            document.querySelector('.ab-iam-root').setAttribute('class', '');
+        }
+    
+        // カスタムHTMLの IAM 本体である iframe 取得
+        var iframe = document.querySelector('.ab-html-message');
+        var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+    
+        // モーダル背景領域を無色透明化
+        //iframeDoc.querySelector('.bz-background').style.backgroundColor = '#FFFFFF00';
+    });  
+  }
+  else {
+    // 上記以外のIAMは何もせずに表示
+    braze.showInAppMessage(inAppMessage);
+  }
+});
+</script>
